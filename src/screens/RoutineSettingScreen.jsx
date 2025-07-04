@@ -5,6 +5,7 @@ import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'rea
 import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker'; // 날짜 선택 UI를 위해 필요
 import { format } from 'date-fns'; // 날짜 포맷팅을 위해 필요
+import { useSafeAreaInsets } from 'react-native-safe-area-context'; // 안전 영역 처리를 위한 임포트
 
 // 공통 스타일 및 컴포넌트 임포트
 import { GlobalStyles } from '../styles/GlobalStyles';
@@ -18,6 +19,8 @@ import Button from '../components/common/Button'; // 공통 버튼
 
 const RoutineSettingScreen = () => {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets(); // 안전 영역 인셋 가져오기
+
   const [goal, setGoal] = useState(''); // 상위 목표 입력
   const [targetDate, setTargetDate] = useState(new Date()); // 달성 기간 설정
   const [showDatePicker, setShowDatePicker] = useState(false); // 날짜 선택기 표시 여부
@@ -47,8 +50,10 @@ const RoutineSettingScreen = () => {
   };
 
   return (
-    <View style={GlobalStyles.container}>
-      <Header title="루틴 설정" showBackButton={true} />
+    // screenContainer에 상단 안전 영역 패딩 적용
+    // insets.top에 추가 패딩을 더해 제목을 확실히 아래로 내립니다.
+    <View style={[styles.screenContainer, { paddingTop: insets.top + 20 }]}> {/* <-- paddingTop을 insets.top + 20으로 조정 */}
+      <Header title="루틴 설정" showBackButton={true} /> {/* Header 컴포넌트 자체에는 별도 marginTop 없이, 부모의 paddingTop으로 조정 */}
 
       <ScrollView contentContainerStyle={styles.scrollViewContentContainer}>
         {/* 상위 목표 입력 필드 */}
@@ -104,7 +109,7 @@ const RoutineSettingScreen = () => {
           style={styles.actionButton}
         />
         <Button
-          title="테스크로 넘어감"
+          title="다음"
           onPress={handleProceedToTasks}
           primary={false} // 보조 버튼 스타일
           style={styles.actionButton}
@@ -115,10 +120,17 @@ const RoutineSettingScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1, // 전체 화면을 채움
+    backgroundColor: Colors.primaryBeige, // 앱 기본 배경색
+    // paddingTop은 useSafeAreaInsets로 동적으로 설정
+  },
+  // headerMarginTop 스타일은 이제 필요 없으므로 제거했습니다.
   scrollViewContentContainer: {
-    paddingHorizontal: 20, // GlobalStyles.container의 패딩을 대체
+    paddingHorizontal: 20, // 화면 좌우 패딩
     paddingBottom: 40, // 하단 여백
-    alignItems: 'center', // 중앙 정렬
+    alignItems: 'center', // ScrollView 내부 콘텐츠를 수평 중앙 정렬
+    paddingTop: 0, // ScrollView 내부 콘텐츠의 상단 여백 (Header 아래로 내용 밀기)
   },
   sectionTitle: {
     fontSize: FontSizes.large,
