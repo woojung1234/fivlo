@@ -28,6 +28,7 @@ yarn-error.*
 
 # macOS
 .DS_Store
+Thumbs.db
 *.pem
 
 # local env files
@@ -35,3 +36,7 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+# 기타 임시/설정 파일
+*.bak
+*.tmp
+*.swp
