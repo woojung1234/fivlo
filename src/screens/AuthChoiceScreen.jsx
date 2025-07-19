@@ -1,24 +1,25 @@
-// src/screens/AuthChoiceScreen.jsx (예시)
+// src/screens/AuthChoiceScreen.jsx
+
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'; // ScrollView 임포트 추가!
 import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color';
-import { FontSizes, FontWeights } from '../styles/Fonts';
+import { Colors } from '../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
+import { FontSizes, FontWeights } from '../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
 import Button from '../components/common/Button';
 import CharacterImage from '../components/common/CharacterImage';
-import Header from '../components/common/Header'; // 공통 헤더
+import Header from '../components/common/Header';
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const AuthChoiceScreen = () => {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
 
   const handleGoogleSignIn = () => {
-    // Google 로그인 로직 (추후 구현)
     console.log('Google Sign In');
   };
 
   const handleAppleSignIn = () => {
-    // Apple 로그인 로직 (추후 구현)
     console.log('Apple Sign In');
   };
 
@@ -31,35 +32,44 @@ const AuthChoiceScreen = () => {
   };
 
   return (
-    <View style={GlobalStyles.container}>
-      <Header title="" showBackButton={true} /> {/* 뒤로가기 버튼만 있는 헤더 */}
-      <Image
-        source={require('../../assets/images/fivlo_logo.png')}
-        style={styles.logo}
-      />
-      <CharacterImage style={styles.obooniCharacter} />
-      <Text style={styles.tagline}>
-        짧은 열정이 아닌 꾸준함이 변한다.{"\n"}삶을 바꾸는 집중 루틴 플랫폼
-      </Text>
+    <View style={[GlobalStyles.container, { paddingTop: insets.top }]}>
+      <Header title="" showBackButton={true} />
+      <ScrollView contentContainerStyle={styles.scrollViewContentContainer}> {/* ScrollView로 감싸기 */}
+        <Image
+          source={require('../../assets/images/fivlo_logo.png')}
+          style={styles.logo}
+        />
+        <CharacterImage style={styles.obooniCharacter} />
+        <Text style={styles.tagline}>
+          짧은 열정이 아닌 꾸준함이 변한다.{"\n"}삶을 바꾸는 집중 루틴 플랫폼
+        </Text>
 
-      <View style={styles.buttonContainer}>
-        <Button title="Google로 시작하기" onPress={handleGoogleSignIn} />
-        <Button title="Apple로 시작하기" onPress={handleAppleSignIn} />
-        <Button title="이메일로 시작하기" onPress={handleEmailSignUp} primary={false} />
-        <TouchableOpacity onPress={handleLogin} style={styles.loginTextButton}>
-          <Text style={styles.loginText}>로그인하기</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Google로 시작하기" onPress={handleGoogleSignIn} />
+          <Button title="Apple로 시작하기" onPress={handleAppleSignIn} />
+          <Button title="이메일로 시작하기" onPress={handleEmailSignUp} primary={false} />
+          <TouchableOpacity onPress={handleLogin} style={styles.loginTextButton}>
+            <Text style={styles.loginText}>로그인하기</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollViewContentContainer: { // ScrollView의 contentContainerStyle로 사용
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 40, // 하단 여백
+  },
   logo: {
     width: 150,
     height: 60,
     resizeMode: 'contain',
-    marginTop: 20, // 헤더 아래로 여백
+    marginTop: 20,
   },
   obooniCharacter: {
     width: 150,
@@ -71,7 +81,7 @@ const styles = StyleSheet.create({
     color: Colors.textDark,
     textAlign: 'center',
     marginBottom: 30,
-    lineHeight: 24, // 줄 간격 조정
+    lineHeight: 24,
   },
   buttonContainer: {
     width: '80%',
@@ -82,10 +92,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   loginText: {
-    color: Colors.secondaryBrown, // 링크처럼 보이게
+    color: Colors.secondaryBrown,
     fontSize: FontSizes.medium,
     fontWeight: FontWeights.medium,
-    textDecorationLine: 'underline', // 밑줄
+    textDecorationLine: 'underline',
   },
 });
 
