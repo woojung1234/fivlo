@@ -1,13 +1,13 @@
-// src/screens/AuthChoiceScreen.jsx
+// src/screens/Auth/AuthChoiceScreen.jsx
 
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'; // ScrollView 임포트 추가!
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
-import { FontSizes, FontWeights } from '../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
-import Button from '../components/common/Button';
-import CharacterImage from '../components/common/CharacterImage';
-import Header from '../components/common/Header';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
+import { FontSizes, FontWeights } from '../../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
+import Button from '../../components/common/Button';
+import CharacterImage from '../../components/common/CharacterImage';
+import Header from '../../components/common/Header';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -34,9 +34,9 @@ const AuthChoiceScreen = () => {
   return (
     <View style={[GlobalStyles.container, { paddingTop: insets.top }]}>
       <Header title="" showBackButton={true} />
-      <ScrollView contentContainerStyle={styles.scrollViewContentContainer}> {/* ScrollView로 감싸기 */}
+      <ScrollView contentContainerStyle={styles.scrollViewContentContainer}>
         <Image
-          source={require('../../assets/images/fivlo_logo.png')}
+          source={require('../../../assets/images/fivlo_logo.png')}
           style={styles.logo}
         />
         <CharacterImage style={styles.obooniCharacter} />
@@ -58,12 +58,12 @@ const AuthChoiceScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  scrollViewContentContainer: { // ScrollView의 contentContainerStyle로 사용
+  scrollViewContentContainer: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingBottom: 40, // 하단 여백
+    paddingBottom: 40,
   },
   logo: {
     width: 150,

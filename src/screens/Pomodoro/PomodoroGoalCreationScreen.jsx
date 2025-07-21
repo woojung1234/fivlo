@@ -7,11 +7,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FontAwesome5 } from '@expo/vector-icons'; // 아이콘 사용
 
 // 공통 스타일 및 컴포넌트 임포트
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color';
-import { FontSizes, FontWeights } from '../styles/Fonts';
-import Header from '../components/common/Header';
-import Button from '../components/common/Button';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../styles/color';
+import { FontSizes, FontWeights } from '../../styles/Fonts';
+import Header from '../../components/common/Header';
+import Button from '../../components/common/Button';
 
 // 포모도로 목표 색상 팔레트 (20가지 색상 예시)
 const COLOR_PALETTE = [

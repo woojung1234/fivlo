@@ -1,7 +1,7 @@
 // src/screens/HomeScreen.jsx
 
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Alert, ScrollView } from 'react-native'; // ScrollView 임포트 확인!
+import React, { useState, useEffect } from 'react'; // <-- 이 라인을 수정했습니다!
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Alert, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { format, addDays, subDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
@@ -73,9 +73,8 @@ const HomeScreen = () => {
     Alert.alert('할 일 상세', `${task.text} 항목 수정 화면으로 이동합니다.`);
   };
 
-  const handleAddTask = () => {
-    Alert.alert('테스크 화면으로 이동', '테스크 설정 화면으로 넘어갑니다.');
-    navigation.navigate('RoutineSetting');
+  const handleGoToTaskCalendar = () => {
+    navigation.navigate('TaskCalendar');
   };
 
   const renderTaskItem = ({ item }) => (
@@ -133,7 +132,7 @@ const HomeScreen = () => {
               contentContainerStyle={styles.flatListContentContainer}
             />
           ) : (
-            <TouchableOpacity onPress={handleAddTask} style={styles.noTaskContainer}>
+            <TouchableOpacity onPress={handleGoToTaskCalendar} style={styles.noTaskContainer}>
               <Text style={styles.noTaskText}>오늘의 일정을 정해주세요</Text>
               <FontAwesome name="plus-circle" size={30} color={Colors.secondaryBrown} style={styles.plusButton} />
             </TouchableOpacity>
@@ -152,26 +151,6 @@ const HomeScreen = () => {
           </View>
         )}
       </ScrollView>
-
-      {/* 하단 탭바는 AppNavigator의 MainTabNavigator에서 관리하므로 여기서는 제거 */}
-      {/* <View style={[styles.bottomTabBar, { paddingBottom: insets.bottom + 20 }]}>
-        <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate('HomeTab')}>
-          <FontAwesome name="home" size={24} color={Colors.secondaryBrown} />
-          <Text style={styles.tabText}>홈</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate('GrowthAlbumTab')}>
-          <FontAwesome name="photo" size={24} color={Colors.secondaryBrown} />
-          <Text style={styles.tabText}>성장앨범</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate('FeaturesTab')}>
-          <FontAwesome name="th-large" size={24} color={Colors.secondaryBrown} />
-          <Text style={styles.tabText}>기능</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate('SettingsTab')}>
-          <FontAwesome name="cog" size={24} color={Colors.secondaryBrown} />
-          <Text style={styles.tabText}>설정</Text>
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 };
@@ -183,7 +162,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContentContainer: {
     alignItems: 'center',
-    paddingBottom: 100, // 하단 탭바 높이 + 여유 공간만큼 패딩 추가
+    paddingBottom: 100,
   },
   dateNavigationContainer: {
     flexDirection: 'row',

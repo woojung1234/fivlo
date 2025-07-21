@@ -7,27 +7,24 @@ import Header from '../components/common/Header';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { Colors } from '../styles/color';
 import { FontSizes, FontWeights } from '../styles/Fonts';
-import { FontAwesome } from '@expo/vector-icons'; // 아이콘 사용
+import { FontAwesome } from '@expo/vector-icons';
 
 const FeaturesScreen = () => {
   const navigation = useNavigation();
 
   const features = [
-    { name: '포모도로', icon: 'hourglass-half', screen: 'Pomodoro' }, // PomodoroScreen으로 연결
-    { name: '망각방지', icon: 'bell', screen: 'Reminder' }, // ReminderScreen
-    { name: '성장앨범', icon: 'camera', screen: 'GrowthAlbumTab' }, // GrowthAlbumScreen (탭으로 연결)
-    { name: '타임어택', icon: 'rocket', screen: 'TimeAttack' }, // TimeAttackScreen
-    { name: '목표설정', icon: 'bullseye', screen: 'RoutineSetting' }, // RoutineSettingScreen
-    { name: '집중분석 그래프', icon: 'bar-chart', screen: 'AnalysisGraph' }, // AnalysisGraphScreen
+    { name: '포모도로', icon: 'hourglass-half', screen: 'Pomodoro' },
+    { name: '망각방지', icon: 'bell', screen: 'Reminder' },
+    { name: '성장앨범', icon: 'camera', screen: 'GrowthAlbumTab' },
+    { name: '타임어택', icon: 'rocket', screen: 'TimeAttack' },
+    { name: '목표설정', icon: 'bullseye', screen: 'RoutineSetting' },
+    { name: '집중분석 그래프', icon: 'bar-chart', screen: 'AnalysisGraph' }, // AnalysisGraphScreen으로 연결
   ];
 
   const handleFeaturePress = (screenName) => {
-    // 탭 내비게이터로 이동하는 경우와 스택 내비게이터로 이동하는 경우를 구분
     if (screenName === 'GrowthAlbumTab') {
-      // 탭 내비게이터로 이동 시, 해당 탭으로 전환
       navigation.navigate('Main', { screen: screenName });
     } else {
-      // 스택 내비게이터로 이동
       navigation.navigate(screenName);
     }
     Alert.alert('기능 이동', `${screenName} 화면으로 이동합니다.`);
@@ -67,13 +64,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   featureItem: {
-    width: '45%', // 한 줄에 2개씩 표시
-    aspectRatio: 1, // 정사각형 유지
+    width: '45%',
+    aspectRatio: 1,
     backgroundColor: Colors.textLight,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: '2.5%', // 아이템 간 간격
+    margin: '2.5%',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

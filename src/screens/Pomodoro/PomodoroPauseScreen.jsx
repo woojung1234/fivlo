@@ -6,12 +6,12 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // 공통 스타일 및 컴포넌트 임포트
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
-import { FontSizes, FontWeights } from '../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
-import Header from '../components/common/Header';
-import Button from '../components/common/Button';
-import CharacterImage from '../components/common/CharacterImage';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
+import { FontSizes, FontWeights } from '../../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
+import Header from '../../components/common/Header';
+import Button from '../../components/common/Button';
+import CharacterImage from '../../components/common/CharacterImage';
 
 const PomodoroPauseScreen = () => {
   const navigation = useNavigation();

@@ -1,14 +1,14 @@
 // src/screens/PomodoroResetConfirmModal.jsx
 
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Modal, Alert } from 'react-native';
+import { View, Text, StyleSheet, Modal, Alert } from 'react-native'; // Modal 임포트 확인!
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 // 공통 스타일 및 컴포넌트 임포트
-import { Colors } from '../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
-import { FontSizes, FontWeights } from '../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
-import Button from '../components/common/Button';
-import CharacterImage from '../components/common/CharacterImage';
+import { Colors } from '../../styles/color';
+import { FontSizes, FontWeights } from '../../styles/Fonts';
+import Button from '../../components/common/Button';
+import CharacterImage from '../../components/common/CharacterImage';
 
 const PomodoroResetConfirmModal = () => {
   const navigation = useNavigation();

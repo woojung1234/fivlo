@@ -1,31 +1,31 @@
-// src/screens/PomodoroBreakChoiceScreen.jsx
+// src/screens/PomodoroCycleCompleteScreen.jsx
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'; // ScrollView 임포트 추가!
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'; // ScrollView 임포트 추가!
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // 공통 스타일 및 컴포넌트 임포트
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
-import { FontSizes, FontWeights } from '../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
-import Header from '../components/common/Header';
-import Button from '../components/common/Button';
-import CharacterImage from '../components/common/CharacterImage';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
+import { FontSizes, FontWeights } from '../../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
+import Header from '../../components/common/Header';
+import Button from '../../components/common/Button';
+import CharacterImage from '../../components/common/CharacterImage';
 
-const PomodoroBreakChoiceScreen = () => {
+const PomodoroCycleCompleteScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const insets = useSafeAreaInsets();
 
-  const { selectedGoal } = route.params;
+  const { selectedGoal, cycleCount } = route.params;
 
-  const handleNoBreak = () => {
+  const handleContinue = () => {
     navigation.navigate('PomodoroTimer', { selectedGoal, resume: true, isFocusMode: true });
   };
 
-  const handleTakeBreak = () => {
-    navigation.navigate('PomodoroTimer', { selectedGoal, isFocusMode: false });
+  const handleStop = () => {
+    navigation.navigate('PomodoroFinish', { selectedGoal });
   };
 
   return (
@@ -33,13 +33,13 @@ const PomodoroBreakChoiceScreen = () => {
       <Header title="포모도로 기능" showBackButton={true} />
 
       <ScrollView contentContainerStyle={styles.contentContainer}> {/* ScrollView로 감싸기 */}
-        <Text style={styles.questionText}>휴식 시간 없이 바로 사이클을 진행하시겠어요?</Text>
+        <Text style={styles.cycleCompleteText}>{cycleCount} 사이클 완료!</Text>
         
         <CharacterImage style={styles.obooniCharacter} />
         
         <View style={styles.buttonContainer}>
-          <Button title="네" onPress={handleNoBreak} style={styles.actionButton} />
-          <Button title="아니오" onPress={handleTakeBreak} primary={false} style={styles.actionButton} />
+          <Button title="계속하기" onPress={handleContinue} style={styles.actionButton} />
+          <Button title="그만하기" onPress={handleStop} primary={false} style={styles.actionButton} />
         </View>
       </ScrollView>
     </View>
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
   },
-  questionText: {
-    fontSize: FontSizes.large,
+  cycleCompleteText: {
+    fontSize: FontSizes.extraLarge,
     fontWeight: FontWeights.bold,
     color: Colors.textDark,
     marginBottom: 30,
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PomodoroBreakChoiceScreen;
+export default PomodoroCycleCompleteScreen;

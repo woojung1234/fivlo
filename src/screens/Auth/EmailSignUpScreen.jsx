@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native'; // ScrollView 임포트 추가!
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
-import { FontSizes, FontWeights } from '../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
-import Header from '../components/common/Header';
-import Input from '../components/common/Input';
-import Checkbox from '../components/common/Checkbox';
-import Button from '../components/common/Button';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
+import { FontSizes, FontWeights } from '../../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
+import Header from '../../components/common/Header';
+import Input from '../../components/common/Input';
+import Checkbox from '../../components/common/Checkbox';
+import Button from '../../components/common/Button';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 

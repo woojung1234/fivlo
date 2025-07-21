@@ -7,10 +7,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 // 공통 스타일 및 컴포넌트 임포트
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
-import { FontSizes, FontWeights } from '../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
-import CharacterImage from '../components/common/CharacterImage';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../styles/color'; // <-- 사용자님 파일명에 맞춰 'color'로 수정!
+import { FontSizes, FontWeights } from '../../styles/Fonts'; // <-- 사용자님 파일명에 맞춰 'Fonts'로 수정!
+import CharacterImage from '../../components/common/CharacterImage';
 
 const FOCUS_TIME = 25 * 60; // 25분 (초 단위)
 const BREAK_TIME = 5 * 60; // 5분 (초 단위)
@@ -130,12 +130,12 @@ const PomodoroTimerScreen = () => {
         {/* 오분이 시계 모양 타이머 (9번 이미지) */}
         <View style={[styles.timerCircle, { borderColor: selectedGoal.color }]}>
           <Image
-            source={require('../../assets/images/obooni_clock.png')} // 오분이 시계 이미지
+            source={require('../../../assets/images/obooni_clock.png')} // 오분이 시계 이미지
             style={styles.obooniClock}
           />
           {/* 시계 바늘 (애니메이션 적용) */}
           <Animated.Image
-            source={require('../../assets/images/clock_needle.png')} // 시계 바늘 이미지
+            source={require('../../../assets/images/clock_needle.png')} // 시계 바늘 이미지
             style={[styles.clockNeedle, { transform: [{ rotate: needleRotation }] }]}
           />
           <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>

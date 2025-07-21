@@ -6,11 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // 공통 스타일 및 컴포넌트 임포트
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { Colors } from '../styles/color';
-import { FontSizes, FontWeights } from '../styles/Fonts';
-import Header from '../components/common/Header';
-import CharacterImage from '../components/common/CharacterImage'; // 오분이 캐릭터 이미지
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { Colors } from '../../styles/color';
+import { FontSizes, FontWeights } from '../../styles/Fonts';
+import Header from '../../components/common/Header';
+import CharacterImage from '../../components/common/CharacterImage'; // 오분이 캐릭터 이미지
 
 const PomodoroScreen = () => {
   const navigation = useNavigation();
