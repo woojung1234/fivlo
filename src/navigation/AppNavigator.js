@@ -67,6 +67,11 @@ import DailyAnalysisView from '../screens/Analysis/DailyAnalysisView';
 import WeeklyAnalysisView from '../screens/Analysis/WeeklyAnalysisView';
 import MonthlyAnalysisView from '../screens/Analysis/MonthlyAnalysisView';
 import DDayAnalysisView from '../screens/Analysis/DDayAnalysisView';
+// 오분이 커스터마이징 관련 화면 임포트
+import ObooniCustomizationScreen from '../screens/Obooni/ObooniCustomizationScreen'; // <-- 이 경로가 올바른지 확인해주세요 (screens/ObooniCustomizationScreen.jsx)
+import ObooniClosetScreen from '../screens/Obooni/ObooniClosetScreen';
+import ObooniOwnedItemsScreen from '../screens/Obooni/ObooniOwnedItemsScreen';
+import ObooniShopScreen from '../screens/Obooni/ObooniShopScreen';
 
 import { Colors } from '../styles/color';
 import { FontSizes, FontWeights } from '../styles/Fonts';
@@ -183,6 +188,11 @@ const AppNavigator = () => {
         <Stack.Screen name="WeeklyAnalysisView" component={WeeklyAnalysisView} />
         <Stack.Screen name="MonthlyAnalysisView" component={MonthlyAnalysisView} />
         <Stack.Screen name="DDayAnalysisView" component={DDayAnalysisView} />
+        {/* 오분이 커스터마이징 관련 화면 (새로 추가) */}
+        <Stack.Screen name="ObooniCustomization" component={ObooniCustomizationScreen} options={{ presentation: 'modal' }} />
+        <Stack.Screen name="ObooniCloset" component={ObooniClosetScreen} />
+        <Stack.Screen name="ObooniOwnedItems" component={ObooniOwnedItemsScreen} />
+        <Stack.Screen name="ObooniShop" component={ObooniShopScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>

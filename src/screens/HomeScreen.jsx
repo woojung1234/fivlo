@@ -1,7 +1,7 @@
 // src/screens/HomeScreen.jsx
 
-import React, { useState, useEffect } from 'react'; // <-- 이 라인을 수정했습니다!
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Alert, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Alert, ScrollView } from 'react-native'; // Modal 임포트 제거
 import { useNavigation } from '@react-navigation/native';
 import { format, addDays, subDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
@@ -12,8 +12,12 @@ import { GlobalStyles } from '../styles/GlobalStyles';
 import { Colors } from '../styles/color';
 import { FontSizes, FontWeights } from '../styles/Fonts';
 import CharacterImage from '../components/common/CharacterImage';
+import Button from '../components/common/Button'; // Button 컴포넌트 임포트 확인
 
-const HomeScreen = () => {
+// ObooniCustomizationScreen 임포트는 유지 (이제 스크린으로 내비게이션)
+// import ObooniCustomizationScreen from '../screens/ObooniCustomizationScreen'; // 이제 AppNavigator가 관리
+
+const HomeScreen = ({ isPremiumUser }) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -22,8 +26,8 @@ const HomeScreen = () => {
   const [obooniState, setObooniState] = useState('default');
 
   const [coins, setCoins] = useState(1234);
-  const [isPremiumUser, setIsPremiumUser] = useState(true);
   const [showCoinGrantModal, setShowCoinGrantModal] = useState(false);
+  // const [showObooniCustomizationModal, setShowObooniCustomizationModal] = useState(false); // 모달 상태 제거
 
   const mockTasks = [
     { id: '1', text: '오전 운동 (30분)', completed: false, category: '운동' },
@@ -77,6 +81,11 @@ const HomeScreen = () => {
     navigation.navigate('TaskCalendar');
   };
 
+  // 오분이 캐릭터 클릭 시 커스터마이징 화면으로 직접 내비게이션
+  const handleObooniPress = () => {
+    navigation.navigate('ObooniCustomization', { isPremiumUser: isPremiumUser });
+  };
+
   const renderTaskItem = ({ item }) => (
     <TouchableOpacity
       style={styles.taskItem}
@@ -118,7 +127,10 @@ const HomeScreen = () => {
           </View>
         )}
 
-        <CharacterImage state={obooniState} style={styles.obooniCharacter} />
+        {/* 오분이 캐릭터 터치 가능하도록 변경 */}
+        <TouchableOpacity onPress={handleObooniPress}>
+          <CharacterImage state={obooniState} style={styles.obooniCharacter} />
+        </TouchableOpacity>
 
         <View style={styles.taskListContainer}>
           <Text style={styles.taskListTitle}>오늘의 할 일</Text>
@@ -151,6 +163,13 @@ const HomeScreen = () => {
           </View>
         )}
       </ScrollView>
+
+      {/* ObooniCustomizationScreen은 이제 Stack.Screen으로 내비게이션되므로 여기서 렌더링하지 않음 */}
+      {/* <ObooniCustomizationScreen
+        isVisible={showObooniCustomizationModal}
+        onClose={() => setShowObooniCustomizationModal(false)}
+        isPremiumUser={isPremiumUser}
+      /> */}
     </View>
   );
 };
@@ -189,11 +208,13 @@ const styles = StyleSheet.create({
   coinDisplayContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.textLight,
-    borderRadius: 15,
+    justifyContent: 'flex-end',
+    width: '90%',
     paddingVertical: 8,
     paddingHorizontal: 15,
     marginBottom: 10,
+    backgroundColor: Colors.textLight,
+    borderRadius: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
@@ -286,35 +307,6 @@ const styles = StyleSheet.create({
   },
   plusButton: {
     // 플러스 버튼 스타일
-  },
-  bottomTabBar: { // 이 스타일은 HomeScreen에서 더 이상 사용되지 않지만, 혹시 모를 참조를 위해 남겨둠.
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
-    height: 80,
-    backgroundColor: Colors.primaryBeige,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -3 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 5,
-    position: 'absolute',
-    bottom: 0,
-  },
-  tabItem: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 5,
-  },
-  tabText: {
-    fontSize: FontSizes.small,
-    color: Colors.secondaryBrown,
-    fontWeight: FontWeights.medium,
-    marginTop: 4,
   },
   coinModalOverlay: {
     position: 'absolute',
